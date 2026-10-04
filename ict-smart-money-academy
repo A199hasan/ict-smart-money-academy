@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ICT Smart Money Academy — BOS, CHOCH, IDM, লিকুইডিটি, Order Block, FVG, Imbalance, CISD, MSS, Premium ও Discount শিখুন।">
+<title>ICT স্মার্ট মানি একাডেমি</title>
+<style>
+:root{--bg:#050b09;--panel:#0b1511;--panel2:#0f1d17;--line:#1b3b2d;--text:#f4f7f5;--muted:#94a59d;--green:#00f59a;--green2:#7affc5;--danger:#ff6678;--gold:#ffd166}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans Bengali','Noto Sans',Arial,sans-serif;background:radial-gradient(circle at 50% -10%,#123e2c 0,#07100c 35%,var(--bg) 75%);color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+nav{position:sticky;top:0;z-index:50;background:rgba(4,10,8,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 6%;display:flex;align-items:center;justify-content:space-between}
+.brand-logo{width:220px;height:auto;display:block;color:#f4f7f5}.logo{font-weight:900;letter-spacing:.5px;color:var(--green);font-size:20px}
+nav ul{display:flex;gap:24px;list-style:none}
+nav a{color:#cbd5d0;font-size:14px}
+nav a:hover{color:var(--green)}
+.menu{display:none;background:none;border:1px solid var(--line);color:white;border-radius:8px;padding:7px 10px}
+.hero{min-height:86vh;display:grid;place-items:center;text-align:center;padding:70px 6%;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:#00f59a12;filter:blur(40px)}
+.hero-content{position:relative;max-width:900px}
+.badge{display:inline-block;border:1px solid #247957;background:#0b2118;color:var(--green2);padding:7px 13px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:1px}
+h1{font-size:clamp(44px,8vw,88px);line-height:1.02;margin:20px 0}
+.gradient{background:linear-gradient(90deg,var(--green),#fff,var(--green2));-webkit-background-clip:text;color:transparent}
+.hero p{max-width:720px;margin:auto;color:var(--muted);font-size:18px}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{border:0;border-radius:10px;padding:13px 20px;font-weight:800;cursor:pointer;background:var(--green);color:#03110a}
+.btn.alt{background:#102119;color:white;border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);max-width:700px;margin:50px auto 0;border:1px solid var(--line);border-radius:15px;background:#07110dcc}
+.stat{padding:18px;border-right:1px solid var(--line)}
+.stat:last-child{border:0}.stat strong{display:block;color:var(--green);font-size:25px}.stat span{font-size:12px;color:var(--muted)}
+section{padding:80px 6%}
+.title{text-align:center;max-width:720px;margin:0 auto 40px}.title h2{font-size:38px}.title p{color:var(--muted)}
+.toolbar{max-width:1050px;margin:0 auto 25px;display:flex;gap:10px;flex-wrap:wrap}
+.search{flex:1;min-width:220px;background:#08120e;border:1px solid var(--line);color:white;border-radius:10px;padding:13px 15px;outline:none}
+.search:focus{border-color:var(--green)}
+.filter{background:#0b1914;color:#cdd7d2;border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer}
+.filter.active{border-color:var(--green);color:var(--green)}
+.grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px}
+.card{background:linear-gradient(145deg,#0c1914,#08110e);border:1px solid var(--line);border-radius:15px;padding:23px;transition:.25s;position:relative}
+.card:hover{transform:translateY(-5px);border-color:#2c9f72;box-shadow:0 15px 40px #00f59a0b}
+.num{color:var(--green);font-size:12px;font-weight:900}.card h3{font-size:23px;margin:7px 0}.card p{font-size:14px;color:var(--muted)}.learn{margin-top:14px;display:inline-block;color:var(--green);font-weight:800;font-size:13px}
+.lesson-wrap{max-width:1000px;margin:auto}.topic{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:25px;margin-bottom:15px;scroll-margin-top:90px}
+.topic h3{color:var(--green);font-size:25px}.topic p{color:#b9c5bf}.topic ul{margin:12px 0 0 20px;color:#cdd6d2}
+.chart-box{max-width:1100px;margin:auto;background:#050a08;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.chart-head{padding:15px 18px;display:flex;justify-content:space-between;border-bottom:1px solid var(--line);color:var(--muted);font-size:13px}
+.chart{height:360px;position:relative;background-image:linear-gradient(#10271e 1px,transparent 1px),linear-gradient(90deg,#10271e 1px,transparent 1px);background-size:45px 45px;overflow:hidden}
+.candle{position:absolute;width:9px;border-radius:2px}.wick{position:absolute;width:2px;background:#b8d9ca;left:50%;transform:translateX(-50%)}
+.up{background:var(--green)}.down{background:var(--danger)}
+.c1{left:10%;top:210px;height:55px}.c2{left:18%;top:170px;height:85px}.c3{left:27%;top:205px;height:50px}.c4{left:36%;top:125px;height:105px}.c5{left:46%;top:145px;height:65px}.c6{left:56%;top:90px;height:120px}.c7{left:66%;top:125px;height:80px}.c8{left:76%;top:70px;height:115px}
+.zone{position:absolute;border:1px dashed var(--green);background:#00f59a10;color:var(--green2);font-size:12px;font-weight:800;padding:7px}.fvg{left:41%;top:108px;width:125px;height:55px}.ob{left:62%;top:205px;width:155px;height:65px}.liquidity{left:20%;top:100px;width:190px;text-align:center;border-color:var(--gold);color:var(--gold)}
+.legend{padding:14px 18px;display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:12px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--green);margin-right:5px}.dot.red{background:var(--danger)}.dot.gold{background:var(--gold)}
+.cta{max-width:1000px;margin:auto;text-align:center;padding:50px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,#0d2118,#07110d)}
+footer{text-align:center;padding:30px;border-top:1px solid var(--line);color:#71817a;font-size:13px}
+.modal{position:fixed;inset:0;background:#000b;display:none;place-items:center;z-index:100;padding:20px}.modal.show{display:grid}.modal-card{max-width:650px;width:100%;background:#0a1711;border:1px solid #286f52;border-radius:16px;padding:28px}.modal-card h2{color:var(--green);margin-bottom:10px}.close{float:right;background:none;border:0;color:white;font-size:24px;cursor:pointer}
+@media(max-width:720px){.brand-logo{width:190px}nav ul{display:none}.menu{display:block}.mobile nav ul{display:flex;position:absolute;top:60px;left:0;right:0;background:#050b09;flex-direction:column;padding:18px 6%;border-bottom:1px solid var(--line)}.stats{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--line)}section{padding:60px 5%}.title h2{font-size:31px}.hero{min-height:78vh}}
+
+.pattern-demo{max-width:1100px;margin:25px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.pattern-mini{background:#08120e;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;color:#cdd7d2}
+.pattern-mini svg{width:90px;height:100px;display:block;margin:0 auto 8px}
+@media(max-width:720px){.pattern-demo{grid-template-columns:repeat(2,1fr)}}
+
+.candle-gallery{max-width:1150px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.candle-card{position:relative;text-align:center;background:linear-gradient(145deg,#0c1914,#08110e);border:1px solid var(--line);border-radius:14px;padding:16px 10px;min-height:190px}
+.candle-card svg{width:85px;height:105px;display:block;margin:6px auto 2px}
+.candle-card h3{font-size:14px;color:#e9f1ed;line-height:1.4}
+.candle-number{position:absolute;top:9px;left:10px;background:#00f59a;color:#03110a;border-radius:50%;width:25px;height:25px;display:grid;place-items:center;font-weight:900;font-size:12px}
+@media(max-width:900px){.candle-gallery{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:650px){.candle-gallery{grid-template-columns:repeat(2,1fr)}}
+
+.premium-modal{position:fixed;inset:0;background:#000c;display:none;place-items:center;z-index:200;padding:20px}
+.premium-modal.show{display:grid}
+.premium-box{max-width:560px;width:100%;background:#0a1711;border:1px solid #2c9f72;border-radius:18px;padding:28px;box-shadow:0 20px 70px #000}
+.premium-box h2{color:#00f59a;margin-bottom:8px}.premium-box p{color:#b9c5bf}
+.pay-option{display:block;width:100%;margin-top:10px;padding:13px;border:1px solid var(--line);background:#0b1914;color:white;border-radius:9px;text-align:left}
+
+
+/* ===== Premium Visual Polish ===== */
+:root{
+  --accent:#00f59a;
+  --accent2:#12d9a0;
+  --bg:#030a07;
+  --panel:#081610;
+  --panel2:#0b1d15;
+  --text:#f2f8f5;
+  --muted:#9eb0a8;
+  --line:#173c2d;
+}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(circle at 15% 10%, rgba(0,245,154,.08), transparent 28%),
+    radial-gradient(circle at 85% 20%, rgba(0,210,170,.06), transparent 25%),
+    linear-gradient(180deg,#020805 0%,#04100b 50%,#020805 100%);
+  color:var(--text);
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:42px 42px;
+}
+nav{
+  backdrop-filter:blur(16px);
+  background:rgba(3,10,7,.82)!important;
+  border-bottom:1px solid rgba(0,245,154,.14)!important;
+}
+nav a{transition:.25s ease}
+nav a:hover{color:var(--accent)!important;text-shadow:0 0 18px rgba(0,245,154,.35)}
+section{padding-top:70px;padding-bottom:70px}
+.title h2{
+  letter-spacing:.3px;
+  text-shadow:0 0 28px rgba(0,245,154,.10);
+}
+.title p{color:var(--muted)}
+.card,.cta,.chart,.zone,.candle-card{
+  background:linear-gradient(145deg,rgba(11,29,21,.94),rgba(5,15,11,.94))!important;
+  border-color:rgba(0,245,154,.18)!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.20);
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.card:hover,.candle-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(0,245,154,.48)!important;
+  box-shadow:0 20px 65px rgba(0,245,154,.08);
+}
+.btn{
+  border-radius:10px!important;
+  box-shadow:0 8px 24px rgba(0,245,154,.12);
+  transition:.2s ease!important;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,245,154,.22)}
+.badge,.num{
+  box-shadow:0 0 18px rgba(0,245,154,.10);
+}
+.candle-gallery{gap:16px!important}
+.candle-card{min-height:205px!important}
+footer{
+  background:#020704!important;
+  border-top:1px solid rgba(0,245,154,.15)!important;
+}
+a{transition:color .2s ease}
+::selection{background:rgba(0,245,154,.28);color:#fff}
+@media(max-width:700px){
+  section{padding-top:48px;padding-bottom:48px}
+}
+
+
+/* ===== Trading Sessions Visual Section ===== */
+.session-wrap{max-width:1150px;margin:auto}
+.session-intro{max-width:820px;margin:0 auto 30px;text-align:center;color:var(--muted)}
+.session-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.session-card{position:relative;background:linear-gradient(145deg,#0b1c14,#07110d);border:1px solid var(--line);border-radius:18px;padding:20px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.22);transition:.2s ease}
+.session-card:hover{transform:translateY(-4px);border-color:#2a8d68;box-shadow:0 18px 45px rgba(0,245,154,.10)}
+.session-card.overlap{grid-column:span 2;border-color:#2a8d68;background:linear-gradient(145deg,#10291d,#07110d)}
+.session-icon{width:92px;height:92px;margin:0 auto 12px;display:block}
+.session-card h3{text-align:center;color:#f3faf6;font-size:20px;margin-bottom:6px}
+.session-time{text-align:center;color:var(--green);font-weight:900;font-size:16px;margin-bottom:10px}
+.session-badge{display:table;margin:0 auto 12px;padding:5px 10px;border:1px solid #275f49;border-radius:99px;background:#0b2118;color:#bfffe4;font-size:11px;font-weight:800}
+.session-card p{color:#b7c5be;font-size:14px;line-height:1.7;text-align:center}
+.session-points{margin:14px 0 0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.07);padding-top:12px}
+.session-points li{color:#d6e0db;font-size:13px;margin:7px 0;padding-left:18px;position:relative}
+.session-points li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+.session-timeline{margin-top:24px;background:#06100c;border:1px solid var(--line);border-radius:18px;padding:22px}
+.session-timeline h3{text-align:center;color:#f4f8f6;margin-bottom:18px}
+.timeline{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin:0 0 12px}
+.timeline span{height:14px;border-radius:4px;background:#123324;border:1px solid #1c4a36}
+.timeline span.active{background:#00f59a;border-color:#00f59a;box-shadow:0 0 12px rgba(0,245,154,.22)}
+.timeline-labels{display:flex;justify-content:space-between;color:#8fa39a;font-size:11px}
+.session-note{margin-top:18px;padding:14px 16px;border-left:3px solid var(--gold);background:#171508;border-radius:8px;color:#d8d3b6;font-size:13px}
+.session-note strong{color:#ffd166}
+.session-mini-chart{width:100%;height:72px;margin-top:12px;display:block}
+@media(max-width:950px){.session-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.session-grid{grid-template-columns:1fr}.session-card.overlap{grid-column:span 1}.session-timeline{padding:16px}.timeline{grid-template-columns:repeat(8,1fr)}}
+
+
+/* ===== BOS / CHOCH + 10 Educational Strategies ===== */
+.boschoch-wrap,.strategy-wrap{max-width:1150px;margin:auto}
+.boschoch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.bos-card{background:linear-gradient(145deg,#0b1c14,#07110d);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 35px rgba(0,0,0,.2)}
+.bos-card h3{color:#f3faf6;margin-bottom:7px}
+.bos-card p{color:#b7c5be;font-size:14px}
+.bos-svg{width:100%;height:210px;display:block;background:#06100c;border:1px solid #173c2d;border-radius:12px;margin:12px 0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;color:#b7c5be;font-size:12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}.dot{width:9px;height:9px;border-radius:50%;display:inline-block}.dot-green{background:#00f59a}.dot-gold{background:#ffd166}.dot-red{background:#ff6678}
+.steps{margin:12px 0 0;padding-left:20px;color:#d7e2dc;font-size:13px}.steps li{margin:6px 0}
+.strategy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.strategy-card{background:linear-gradient(145deg,#0a1912,#07100c);border:1px solid var(--line);border-radius:16px;padding:18px;position:relative}
+.strategy-num{position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#00f59a;color:#03110a;font-weight:900}
+.strategy-card h3{color:#f4faf7;padding-right:38px;font-size:17px;margin-bottom:7px}
+.strategy-card p{color:#b8c6bf;font-size:13px}
+.strategy-card strong{color:#bfffe4}
+.demo-warning{margin-top:20px;padding:15px 17px;border-left:3px solid #ffd166;background:#171508;border-radius:8px;color:#ddd6b8;font-size:13px}
+@media(max-width:750px){.boschoch-grid,.strategy-grid{grid-template-columns:1fr}}
+
+
+.strategy-visual{width:100%;height:150px;display:block;margin:12px 0 15px;background:#06100c;border:1px solid #173c2d;border-radius:12px}
+.strategy-visual text{font-family:Arial,sans-serif}
+
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="logo" href="#home" aria-label="ICT Smart Money Academy"><svg class="brand-logo" viewBox="0 0 520 120" role="img" aria-label="ICT Smart Money Academy logo">
+  <circle cx="58" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="7"/>
+  <path d="M28 76V48h12v28M45 76V38h12v38M62 76V52h12v24" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+  <path d="M25 91h52M77 48l28-25M105 23l-4 17M105 23l-17 3" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="125" y="54" font-family="Arial, sans-serif" font-size="32" font-weight="900" letter-spacing="1">ICT <tspan fill="#00f59a">স্মার্ট মানি</tspan></text>
+  <text x="127" y="86" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="7">ACADEMY</text>
+  <path d="M127 97h190" stroke="currentColor" stroke-width="2" opacity=".65"/>
+</svg></a>
+  <button class="menu" id="menu">☰</button>
+  <ul>
+    <li><a href="#home">হোম</a></li><li><a href="#topics">কনসেপ্ট</a></li>
+    <li><a href="#chart">চার্ট</a></li><li><a href="#fifty-candles">৫০ ক্যান্ডেল</a></li><li><a href="#patterns">ক্যান্ডেল প্যাটার্ন</a></li><li><a href="#risk">রিস্ক ম্যানেজমেন্ট</a></li><li><a href="#pdh">PDH / PDL</a></li><li><a href="#sessions">সেশন</a></li><li><a href="#bos-choch">BOS / CHOCH</a></li><li><a href="#strategies">১০ স্ট্র্যাটেজি</a></li><li><a href="#contact">যোগাযোগ</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-content">
+    <span class="badge">ICT • SMC • প্রাইস অ্যাকশন</span>
+    <h1>MASTER <span class="gradient">স্মার্ট মানি</span></h1>
+    <p>সহজ ও শিক্ষার্থী-বান্ধব প্ল্যাটফর্মে মার্কেট স্ট্রাকচার, লিকুইডিটি, ডিসপ্লেসমেন্ট এবং গুরুত্বপূর্ণ ICT/SMC কনসেপ্ট শিখুন।</p>
+    <div class="actions">
+      <a class="btn" href="#topics">শেখা শুরু করুন →</a>
+      <a class="btn alt" href="#chart">চার্ট দেখুন</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong>10</strong><span>মূল কনসেপ্ট</span></div>
+      <div class="stat"><strong>100%</strong><span>রেসপন্সিভ</span></div>
+      <div class="stat"><strong>FREE</strong><span>লার্নিং পেজ</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="topics">
+  <div class="title"><h2>ICT / SMC কনসেপ্ট</h2><p>কনসেপ্ট খুঁজুন বা ফিল্টার করুন এবং সংশ্লিষ্ট লেসন খুলুন।</p></div>
+  <div class="toolbar">
+    <input class="search" id="search" placeholder="Search BOS, FVG, লিকুইডিটি...">
+    <button class="filter active" data-filter="all">সব</button>
+    <button class="filter" data-filter="structure">স্ট্রাকচার</button>
+    <button class="filter" data-filter="zones">জোন</button>
+    <button class="filter" data-filter="flow">লিকুইডিটি ও ফ্লো</button>
+  </div>
+  <div class="grid" id="cards">
+    <article class="card" data-cat="structure" data-name="BOS Break of Structure"><span class="num">০১ • স্ট্রাকচার</span><h3>BOS</h3><p>ব্রেক অব স্ট্রাকচার — আগের গুরুত্বপূর্ণ সুইং পয়েন্ট ভেঙে যাওয়াকে বোঝায়।</p><a class="learn" href="#bos">আরও জানুন →</a></article>
+    <article class="card" data-cat="structure" data-name="CHOCH Change of Character"><span class="num">০২ • স্ট্রাকচার</span><h3>CHOCH</h3><p>চেঞ্জ অব ক্যারেক্টার — প্রাইসের আচরণে সম্ভাব্য পরিবর্তনকে বোঝায়।</p><a class="learn" href="#choch">আরও জানুন →</a></article>
+    <article class="card" data-cat="flow" data-name="IDM Inducement"><span class="num">০৩ • ফ্লো</span><h3>IDM</h3><p>ইনডিউসমেন্ট — বড় মুভের আগে ট্রেডারদের আকৃষ্ট করতে পারে এমন প্রাইস অ্যাকশন।</p><a class="learn" href="#idm">আরও জানুন →</a></article>
+    <article class="card" data-cat="flow" data-name="লিকুইডিটি Buy Side Sell Side Sweep"><span class="num">০৪ • ফ্লো</span><h3>LIQUIDITY</h3><p>বাই-সাইড, সেল-সাইড এবং লিকুইডিটি সুইপ কনসেপ্ট শিখুন।</p><a class="learn" href="#liquidity">আরও জানুন →</a></article>
+    <article class="card" data-cat="zones" data-name="Order Block OB"><span class="num">০৫ • জোন</span><h3>অর্ডার ব্লক</h3><p>ডিসপ্লেসমেন্টের আগে বিপরীত ক্যান্ডেলের আশপাশের সম্ভাব্য রিঅ্যাকশন এরিয়া।</p><a class="learn" href="#ob">আরও জানুন →</a></article>
+    <article class="card" data-cat="zones" data-name="FVG Fair Value Gap"><span class="num">০৬ • জোন</span><h3>FVG</h3><p>ফেয়ার ভ্যালু গ্যাপ — ডিসপ্লেসমেন্টের সঙ্গে সম্পর্কিত তিন-ক্যান্ডেলের ইমব্যালান্স।</p><a class="learn" href="#fvg">আরও জানুন →</a></article>
+    <article class="card" data-cat="zones" data-name="Imbalance"><span class="num">০৭ • জোন</span><h3>ইমব্যালান্স</h3><p>দ্রুত প্রাইস মুভমেন্টের কারণে তৈরি হওয়া তুলনামূলক অদক্ষ ট্রেডিং এরিয়া।</p><a class="learn" href="#imbalance">আরও জানুন →</a></article>
+    <article class="card" data-cat="flow" data-name="CISD Change In State Of Delivery"><span class="num">০৮ • ফ্লো</span><h3>CISD</h3><p>চেঞ্জ ইন স্টেট অব ডেলিভারি — প্রাইস ডেলিভারিতে পরিবর্তনের একটি কনসেপ্ট।</p><a class="learn" href="#cisd">আরও জানুন →</a></article>
+    <article class="card" data-cat="structure" data-name="MSS Market Structure Shift"><span class="num">০৯ • স্ট্রাকচার</span><h3>MSS</h3><p>মার্কেট স্ট্রাকচার শিফট — মার্কেট স্ট্রাকচারে সম্ভাব্য পরিবর্তন।</p><a class="learn" href="#mss">আরও জানুন →</a></article>
+    <article class="card" data-cat="zones" data-name="Premium Discount Zone"><span class="num">১০ • জোন</span><h3>PREMIUM / DISCOUNT</h3><p>একটি ডিলিং রেঞ্জকে প্রিমিয়াম, ইকুইলিব্রিয়াম ও ডিসকাউন্টে ভাগ করা।</p><a class="learn" href="#pd">আরও জানুন →</a></article>
+  <article class="card" data-cat="flow" data-name="Risk Management Position Size Stop Loss Risk Reward">
+<span class="num">১১ • রিস্ক</span><h3>রিস্ক ম্যানেজমেন্ট</h3>
+<p>পজিশন সাইজিং, স্টপ-লস পরিকল্পনা এবং প্রতি ট্রেডে নিয়ন্ত্রিত রিস্কের মাধ্যমে ট্রেডিং ক্যাপিটাল সুরক্ষিত রাখুন।</p>
+<a class="learn" href="#risk">আরও জানুন →</a></article>
+<article class="card" data-cat="structure" data-name="Previous Day High Low PDH PDL">
+<span class="num">১২ • লিকুইডিটি</span><h3>PREVIOUS DAY HIGH / LOW</h3>
+<p>আগের দিনের হাই ও লোকে লিকুইডিটি ও মার্কেট কনটেক্সটের গুরুত্বপূর্ণ রেফারেন্স লেভেল হিসেবে মার্ক করুন।</p>
+<a class="learn" href="#pdh">আরও জানুন →</a></article>
+<article class="card" data-cat="flow" data-name="London New York Session">
+<span class="num">১৩ • সেশন</span><h3>LONDON / NEW YORK</h3>
+<p>লন্ডন ও নিউইয়র্ক ট্রেডিং সেশন, সেশন হাই/লো এবং ভোলাটিলিটি শিখুন।</p>
+<a class="learn" href="#sessions">আরও জানুন →</a></article></div>
+</section>
+
+<section>
+  <div class="title"><h2>কনসেপ্টগুলো শিখুন</h2><p>শিক্ষামূলক ব্যাখ্যা — নিশ্চিত ট্রেড সিগন্যাল নয়।</p></div>
+  <div class="lesson-wrap">
+    <div class="topic" id="bos"><h3>BOS — ব্রেক অব স্ট্রাকচার</h3><p>প্রাইস আগের গুরুত্বপূর্ণ সুইং হাই বা লো ভেঙে যায়। উপযুক্ত কনটেক্সটের সঙ্গে মিলিয়ে এটি কন্টিনিউয়েশনের সম্ভাব্য প্রমাণ হিসেবে দেখা যায়।</p><ul><li>গুরুত্বপূর্ণ সুইং পয়েন্ট শনাক্ত করুন</li><li>কনফার্মেশনের জন্য অপেক্ষা করুন</li><li>লিকুইডিটি ও হায়ার-টাইমফ্রেম কনটেক্সটের সঙ্গে মিলিয়ে দেখুন</li></ul></div>
+    <div class="topic" id="choch"><h3>CHOCH — চেঞ্জ অব ক্যারেক্টার</h3><p>প্রাইস যেভাবে হাই ও লো তৈরি করে তাতে পরিবর্তন, যা সম্ভাব্য দিক পরিবর্তনের সতর্কতা দিতে পারে।</p></div>
+    <div class="topic" id="idm"><h3>IDM — ইনডিউসমেন্ট</h3><p>লিকুইডিটি নেওয়ার আগে কোনো সেটআপে ট্রেডারদের আকৃষ্ট করতে পারে এমন প্রাইস মুভমেন্ট।</p></div>
+    <div class="topic" id="liquidity"><h3>LIQUIDITY</h3><p>যেসব জায়গায় অর্ডার জমা থাকতে পারে, যেমন স্পষ্ট সুইং পয়েন্ট বা সমান হাই/লো।</p><ul><li>বাই-সাইড লিকুইডিটি</li><li>সেল-সাইড লিকুইডিটি</li><li>লিকুইডিটি সুইপ</li></ul></div>
+    <div class="topic" id="ob"><h3>অর্ডার ব্লক</h3><p>শক্তিশালী ডিসপ্লেসমেন্টের আগে শেষ বিপরীত ক্যান্ডেলের আশপাশের একটি পর্যবেক্ষণযোগ্য জোন। এটি সম্ভাব্য রিঅ্যাকশন এরিয়া, নিশ্চিত এন্ট্রি নয়।</p></div>
+    <div class="topic" id="fvg"><h3>FVG — ফেয়ার ভ্যালু গ্যাপ</h3><p>শক্তিশালী ডিসপ্লেসমেন্টে তৈরি তিন-ক্যান্ডেলের প্রাইস ইমব্যালান্স। ট্রেডাররা রিট্রেসমেন্টের জন্য এটি পর্যবেক্ষণ করতে পারেন।</p></div>
+    <div class="topic" id="imbalance"><h3>ইমব্যালান্স</h3><p>যেখানে প্রাইস দ্রুত মুভ করেছে এবং তুলনামূলক অদক্ষভাবে ট্রেড হয়েছে; প্রাইস ফিরে এলে এটি আগ্রহের এরিয়া হতে পারে।</p></div>
+    <div class="topic" id="cisd"><h3>CISD — চেঞ্জ ইন স্টেট অব ডেলিভারি</h3><p>কিছু ICT ট্রেডার স্বল্পমেয়াদি প্রাইস ডেলিভারি বা অর্ডার ফ্লোতে পরিবর্তন বোঝাতে এই কনসেপ্ট ব্যবহার করেন।</p></div>
+    <div class="topic" id="mss"><h3>MSS — মার্কেট স্ট্রাকচার শিফট</h3><p>মার্কেট স্ট্রাকচারে সম্ভাব্য পরিবর্তন, যা প্রায়ই লিকুইডিটি সুইপ, ডিসপ্লেসমেন্ট ও হায়ার-টাইমফ্রেম কনটেক্সটের সঙ্গে পড়া হয়।</p></div>
+    <div class="topic" id="pd"><h3>প্রিমিয়াম ও ডিসকাউন্ট জোন</h3><p>একটি ডিলিং রেঞ্জকে প্রিমিয়াম ও ডিসকাউন্টে ভাগ করা যায়, আর মাঝের অংশকে ইকুইলিব্রিয়াম বলা হয়।</p><ul><li>প্রিমিয়াম → উপরের অর্ধেক</li><li>ডিসকাউন্ট → নিচের অর্ধেক</li><li>ইকুইলিব্রিয়াম → মধ্যবিন্দু</li></ul></div>
+  <div class="topic" id="pdh">
+<h3>আগের দিনের হাই / লো — PDH / PDL</h3>
+<p>Previous Day High (PDH) এবং Previous Day Low (PDL) হলো আগের ট্রেডিং দিনের রেফারেন্স লেভেল। নতুন সেশন শুরু হওয়ার আগে ট্রেডাররা সাধারণত এগুলো মার্ক করেন।</p>
+<ul>
+<li>PDH = আগের দিনের হাই</li>
+<li>PDL = আগের দিনের লো</li>
+<li>এই লেভেলগুলোর আশপাশে প্রাইস কীভাবে রিঅ্যাক্ট করে তা দেখুন।</li>
+<li>এগুলো লিকুইডিটির কনটেক্সট হিসেবে ব্যবহার করা যায়, নিশ্চিত এন্ট্রি সিগন্যাল হিসেবে নয়।</li>
+</ul>
+</div><div class="topic" id="sessions">
+<h3>লন্ডন / নিউইয়র্ক সেশন</h3>
+<p>ট্রেডিং সেশন দিনের সময় অনুযায়ী মার্কেট অ্যাক্টিভিটি বুঝতে সাহায্য করে। লন্ডন ও নিউইয়র্কের ওপেন এবং ওভারল্যাপের সময় প্রাইস অ্যাক্টিভিটি ও ভোলাটিলিটি পরিবর্তিত হতে পারে বলে এগুলো বেশি পর্যবেক্ষণ করা হয়।</p>
+<ul>
+<li><strong>লন্ডন:</strong> লন্ডন ওপেন, সেশন হাই/লো এবং লিকুইডিটি আচরণ পর্যবেক্ষণ করুন।</li>
+<li><strong>নিউইয়র্ক:</strong> নিউইয়র্ক ওপেন এবং প্রাইস কীভাবে লন্ডনের লেভেলের সঙ্গে রিঅ্যাক্ট করে তা পর্যবেক্ষণ করুন।</li>
+<li><strong>লন্ডন–নিউইয়র্ক ওভারল্যাপ:</strong> বেশি মার্কেট অ্যাক্টিভিটির সম্ভাবনার জন্য এটি প্রায়ই পর্যবেক্ষণ করা হয়।</li>
+<li>আপনার ব্রোকারের চার্ট টাইম ব্যবহার করুন এবং ডে-লাইট সেভিংস পরিবর্তনের জন্য সেশন টাইম যাচাই করুন।</li>
+</ul>
+</div><div class="topic" id="risk">
+<h3>রিস্ক ম্যানেজমেন্ট</h3>
+<p>রিস্ক ম্যানেজমেন্ট হলো প্রতিটি ট্রেডে কতটা ক্যাপিটাল ঝুঁকিতে রাখবেন তা নিয়ন্ত্রণ করার প্রক্রিয়া। ভালো সেটআপও লস করতে পারে, তাই লক্ষ্য হলো অ্যাকাউন্ট সুরক্ষিত রাখা এবং ধারাবাহিক থাকা।</p>
+<ul>
+<li><strong>প্রতি ট্রেডে রিস্ক:</strong> অ্যাকাউন্ট ইকুইটির একটি ছোট, পূর্বনির্ধারিত শতাংশ বেছে নিন।</li>
+<li><strong>স্টপ লস:</strong> এন্ট্রির আগে ইনভ্যালিডেশন পয়েন্ট নির্ধারণ করুন।</li>
+<li><strong>পজিশন সাইজ:</strong> স্টপ ডিস্ট্যান্স ও নির্ধারিত রিস্ক অনুযায়ী পজিশন সাইজ হিসাব করুন।</li>
+<li><strong>রিস্ক-টু-রিওয়ার্ড:</strong> পরিকল্পিত রিস্কের সঙ্গে সম্ভাব্য রিওয়ার্ড তুলনা করুন।</li>
+<li><strong>দৈনিক লস লিমিট:</strong> দিনের সর্বোচ্চ লস নির্ধারণ করুন এবং সেখানে পৌঁছালে ট্রেড বন্ধ করুন।</li>
+<li><strong>রিভেঞ্জ ট্রেডিং নয়:</strong> আগের লস পূরণ করতে রিস্ক বাড়াবেন না।</li>
+</ul>
+<p style="margin-top:12px;color:#ffd166">উদাহরণ: আপনার অ্যাকাউন্ট $১,০০০ এবং আপনি ১% রিস্ক বেছে নিলে, ওই ট্রেডে পরিকল্পিত সর্বোচ্চ লস হবে $১০।</p>
+</div></div>
+</section>
+
+<section id="chart">
+  <div class="title"><h2>স্মার্ট মানি চার্ট ডেমো</h2><p>লিকুইডিটি, FVG ও অর্ডার ব্লকের একটি ভিজ্যুয়াল উদাহরণ।</p></div>
+  <div class="chart-box">
+    <div class="chart-head"><span>XAUUSD • ডেমো</span><span>শিক্ষামূলক ভিজ্যুয়াল</span></div>
+    <div class="chart">
+      <div class="zone liquidity">LIQUIDITY</div><div class="zone fvg">FVG</div><div class="zone ob">অর্ডার ব্লক</div>
+      <div class="candle up c1"></div><div class="candle up c2"></div><div class="candle down c3"></div><div class="candle up c4"></div><div class="candle down c5"></div><div class="candle up c6"></div><div class="candle down c7"></div><div class="candle up c8"></div>
+    </div>
+    
+<div class="pattern-demo">
+  <div class="pattern-mini">
+    <svg viewBox="0 0 90 110">
+      <path d="M45 8V102" stroke="#b8d9ca" stroke-width="3"/>
+      <rect x="29" y="48" width="32" height="12" rx="3" fill="#00f59a"/>
+    </svg>
+    <strong>ডোজি</strong>
+  </div>
+  <div class="pattern-mini">
+    <svg viewBox="0 0 90 110">
+      <path d="M45 12V102" stroke="#b8d9ca" stroke-width="3"/>
+      <rect x="29" y="32" width="32" height="28" rx="2" fill="#00f59a"/>
+    </svg>
+    <strong>হ্যামার</strong>
+  </div>
+  <div class="pattern-mini">
+    <svg viewBox="0 0 90 110">
+      <path d="M45 8V102" stroke="#b8d9ca" stroke-width="3"/>
+      <rect x="29" y="65" width="32" height="27" rx="2" fill="#ff6678"/>
+    </svg>
+    <strong>শুটিং স্টার</strong>
+  </div>
+  <div class="pattern-mini">
+    <svg viewBox="0 0 90 110">
+      <path d="M27 15V94M63 15V94" stroke="#b8d9ca" stroke-width="3"/>
+      <rect x="15" y="43" width="24" height="28" fill="#ff6678"/>
+      <rect x="51" y="28" width="24" height="48" fill="#00f59a"/>
+    </svg>
+    <strong>এনগালফিং</strong>
+  </div>
+</div>
+<div class="legend"><span><i class="dot"></i>বুলিশ</span><span><i class="dot red"></i>বেয়ারিশ</span><span><i class="dot gold"></i>লিকুইডিটি</span></div>
+  </div>
+</section>
+
+
+
+
+<section id="patterns">
+  <div class="title">
+    <h2>📊 ক্যান্ডেলস্টিক প্যাটার্ন</h2>
+    <p>শেখার জন্য কিছু গুরুত্বপূর্ণ ক্যান্ডেলস্টিক প্যাটার্ন। শুধু একটি প্যাটার্ন দেখে ট্রেড নেওয়া নিশ্চিত সিগন্যাল নয়।</p>
+  </div>
+
+  <div class="grid">
+    <article class="card" data-cat="flow" data-name="ডোজি Candlestick Pattern">
+      <span class="num">01 • ক্যান্ডেল</span><h3>ডোজি</h3>
+      <p>ওপেন ও ক্লোজ প্রায় একই লেভেলে থাকে, যা ক্রেতা ও বিক্রেতার মধ্যে অনিশ্চয়তা বা ভারসাম্য বোঝাতে পারে।</p>
+      <a class="learn" href="#doji">আরও জানুন →</a>
+    </article>
+    <article class="card" data-cat="flow" data-name="হ্যামার Candlestick Pattern">
+      <span class="num">02 • ক্যান্ডেল</span><h3>হ্যামার</h3>
+      <p>ছোট বডি ও লম্বা নিচের উইক থাকে। বাজার নিচে যাওয়ার পর সম্ভাব্য রিজেকশন বোঝার জন্য এটি দেখা হয়।</p>
+      <a class="learn" href="#hammer">আরও জানুন →</a>
+    </article>
+    <article class="card" data-cat="flow" data-name="শুটিং স্টার Candlestick Pattern">
+      <span class="num">03 • ক্যান্ডেল</span><h3>শুটিং স্টার</h3>
+      <p>ছোট বডি ও লম্বা উপরের উইক থাকে। বাজার উপরে যাওয়ার পর সম্ভাব্য রিজেকশন বোঝার জন্য এটি দেখা হয়।</p>
+      <a class="learn" href="#shooting">আরও জানুন →</a>
+    </article>
+    <article class="card" data-cat="flow" data-name="বুলিশ এনগালফিং Candlestick Pattern">
+      <span class="num">04 • ক্যান্ডেল</span><h3>বুলিশ এনগালফিং</h3>
+      <p>একটি বুলিশ ক্যান্ডেলের বডি আগের বেয়ারিশ ক্যান্ডেলের বডিকে ঢেকে দেয়।</p>
+      <a class="learn" href="#bullengulf">আরও জানুন →</a>
+    </article>
+    <article class="card" data-cat="flow" data-name="বেয়ারিশ এনগালফিং Candlestick Pattern">
+      <span class="num">05 • ক্যান্ডেল</span><h3>বেয়ারিশ এনগালফিং</h3>
+      <p>একটি বেয়ারিশ ক্যান্ডেলের বডি আগের বুলিশ ক্যান্ডেলের বডিকে ঢেকে দেয়।</p>
+      <a class="learn" href="#bearengulf">আরও জানুন →</a>
+    </article>
+    <article class="card" data-cat="flow" data-name="মর্নিং স্টার Candlestick Pattern">
+      <span class="num">06 • ক্যান্ডেল</span><h3>মর্নিং স্টার</h3>
+      <p>তিনটি ক্যান্ডেলের একটি প্যাটার্ন, যা সম্ভাব্য বুলিশ রিভার্সাল বোঝার জন্য দেখা হয়।</p>
+      <a class="learn" href="#morning">আরও জানুন →</a>
+    </article>
+    <article class="card" data-cat="flow" data-name="ইভনিং স্টার Candlestick Pattern">
+      <span class="num">07 • ক্যান্ডেল</span><h3>ইভনিং স্টার</h3>
+      <p>তিনটি ক্যান্ডেলের একটি প্যাটার্ন, যা সম্ভাব্য বেয়ারিশ রিভার্সাল বোঝার জন্য দেখা হয়।</p>
+      <a class="learn" href="#evening">আরও জানুন →</a>
+    </article>
+    <article class="card" data-cat="flow" data-name="ইনসাইড বার Candlestick Pattern">
+      <span class="num">08 • ক্যান্ডেল</span><h3>ইনসাইড বার</h3>
+      <p>যে ক্যান্ডেলের High ও Low আগের ক্যান্ডেলের রেঞ্জের ভেতরে থাকে; এটি অনেক সময় কনসোলিডেশন বোঝায়।</p>
+      <a class="learn" href="#insidebar">আরও জানুন →</a>
+    </article>
+  </div>
+
+  <div class="lesson-wrap" style="margin-top:30px">
+    <div class="topic" id="doji"><h3>ডোজি</h3><p>সাধারণত এর বডি খুব ছোট হয়, কারণ ওপেন ও ক্লোজ কাছাকাছি থাকে। কনটেক্সট গুরুত্বপূর্ণ; ডোজি অনিশ্চয়তা বোঝাতে পারে, এটি স্বয়ংক্রিয় রিভার্সাল নয়।</p></div>
+    <div class="topic" id="hammer"><h3>হ্যামার</h3><p>সাধারণত ক্যান্ডেলের উপরের দিকে ছোট বডি এবং লম্বা নিচের উইক থাকে। Support বা পতনের পর এটি পর্যবেক্ষণ করা হয়।</p></div>
+    <div class="topic" id="shooting"><h3>শুটিং স্টার</h3><p>সাধারণত ক্যান্ডেলের নিচের দিকে ছোট বডি এবং লম্বা উপরের উইক থাকে। Resistance বা বৃদ্ধির পর এটি পর্যবেক্ষণ করা হয়।</p></div>
+    <div class="topic" id="bullengulf"><h3>বুলিশ এনগালফিং</h3><p>দুই ক্যান্ডেলের প্যাটার্ন, যেখানে দ্বিতীয় বুলিশ বডি আগের বেয়ারিশ বডিকে পুরোপুরি ঢেকে দেয়। এটি সম্ভাব্য বুলিশ মোমেন্টাম বা রিভার্সালের ইঙ্গিত হিসেবে দেখা হয়।</p></div>
+    <div class="topic" id="bearengulf"><h3>বেয়ারিশ এনগালফিং</h3><p>দুই ক্যান্ডেলের প্যাটার্ন, যেখানে দ্বিতীয় বেয়ারিশ বডি আগের বুলিশ বডিকে পুরোপুরি ঢেকে দেয়। এটি সম্ভাব্য বেয়ারিশ মোমেন্টাম বা রিভার্সালের ইঙ্গিত হিসেবে দেখা হয়।</p></div>
+    <div class="topic" id="morning"><h3>মর্নিং স্টার</h3><p>সাধারণত একটি বেয়ারিশ ক্যান্ডেল, একটি ছোট মাঝের ক্যান্ডেল এবং একটি শক্তিশালী বুলিশ ক্যান্ডেল নিয়ে গঠিত। পতনের শেষে এটি দেখা হয়।</p></div>
+    <div class="topic" id="evening"><h3>ইভনিং স্টার</h3><p>সাধারণত একটি বুলিশ ক্যান্ডেল, একটি ছোট মাঝের ক্যান্ডেল এবং একটি শক্তিশালী বেয়ারিশ ক্যান্ডেল নিয়ে গঠিত। বৃদ্ধির শেষে এটি দেখা হয়।</p></div>
+    <div class="topic" id="insidebar"><h3>ইনসাইড বার</h3><p>দ্বিতীয় ক্যান্ডেলের High ও Low আগের ক্যান্ডেলের রেঞ্জের ভেতরে থাকে। এটি কনসোলিডেশন বোঝাতে পারে এবং মার্কেট কনটেক্সট অনুযায়ী ব্যাখ্যা করা হয়।</p></div>
+  </div>
+</section>
+
+
+
+<section id="fifty-candles">
+  <div class="title">
+    <h2>৫০টি ক্যান্ডেলস্টিক প্যাটার্ন</h2>
+    <p>প্রতিটি প্যাটার্নের নম্বর, নাম ও সহজ ভিজ্যুয়াল।</p>
+  </div>
+  <div class="candle-gallery">
+<article class="candle-card"><div class="candle-number">1</div><svg viewBox="0 0 100 125" aria-label="ডোজি"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="48" width="30" height="22" rx="2" fill="#ff6678"/></svg><h3>ডোজি</h3></article>
+<article class="candle-card"><div class="candle-number">2</div><svg viewBox="0 0 100 125" aria-label="ড্রাগনফ্লাই ডোজি"><path d="M50 12V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="35" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>ড্রাগনফ্লাই ডোজি</h3></article>
+<article class="candle-card"><div class="candle-number">3</div><svg viewBox="0 0 100 125" aria-label="গ্রেভস্টোন ডোজি"><path d="M50 5V115" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="72" width="30" height="20" rx="2" fill="#ff6678"/></svg><h3>গ্রেভস্টোন ডোজি</h3></article>
+<article class="candle-card"><div class="candle-number">4</div><svg viewBox="0 0 100 125" aria-label="লং-লেগড ডোজি"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="52" width="30" height="10" rx="2" fill="#00f59a"/></svg><h3>লং-লেগড ডোজি</h3></article>
+<article class="candle-card"><div class="candle-number">5</div><svg viewBox="0 0 100 125" aria-label="স্পিনিং টপ"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#00f59a"/></svg><h3>স্পিনিং টপ</h3></article>
+<article class="candle-card"><div class="candle-number">6</div><svg viewBox="0 0 100 125" aria-label="হ্যামার"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#ff6678"/></svg><h3>হ্যামার</h3></article>
+<article class="candle-card"><div class="candle-number">7</div><svg viewBox="0 0 100 125" aria-label="ইনভার্টেড হ্যামার"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>ইনভার্টেড হ্যামার</h3></article>
+<article class="candle-card"><div class="candle-number">8</div><svg viewBox="0 0 100 125" aria-label="হ্যাংগিং ম্যান"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="20" rx="2" fill="#00f59a"/></svg><h3>হ্যাংগিং ম্যান</h3></article>
+<article class="candle-card"><div class="candle-number">9</div><svg viewBox="0 0 100 125" aria-label="শুটিং স্টার"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="48" width="30" height="22" rx="2" fill="#ff6678"/></svg><h3>শুটিং স্টার</h3></article>
+<article class="candle-card"><div class="candle-number">10</div><svg viewBox="0 0 100 125" aria-label="বুলিশ মারুবোজু"><path d="M50 12V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="35" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>বুলিশ মারুবোজু</h3></article>
+<article class="candle-card"><div class="candle-number">11</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ মারুবোজু"><path d="M50 5V115" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="72" width="30" height="20" rx="2" fill="#ff6678"/></svg><h3>বেয়ারিশ মারুবোজু</h3></article>
+<article class="candle-card"><div class="candle-number">12</div><svg viewBox="0 0 100 125" aria-label="বুলিশ এনগালফিং"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="52" width="30" height="10" rx="2" fill="#00f59a"/></svg><h3>বুলিশ এনগালফিং</h3></article>
+<article class="candle-card"><div class="candle-number">13</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ এনগালফিং"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#00f59a"/></svg><h3>বেয়ারিশ এনগালফিং</h3></article>
+<article class="candle-card"><div class="candle-number">14</div><svg viewBox="0 0 100 125" aria-label="বুলিশ হারামি"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#ff6678"/></svg><h3>বুলিশ হারামি</h3></article>
+<article class="candle-card"><div class="candle-number">15</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ হারামি"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>বেয়ারিশ হারামি</h3></article>
+<article class="candle-card"><div class="candle-number">16</div><svg viewBox="0 0 100 125" aria-label="হারামি ক্রস"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="20" rx="2" fill="#00f59a"/></svg><h3>হারামি ক্রস</h3></article>
+<article class="candle-card"><div class="candle-number">17</div><svg viewBox="0 0 100 125" aria-label="পিয়ার্সিং লাইন"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="48" width="30" height="22" rx="2" fill="#ff6678"/></svg><h3>পিয়ার্সিং লাইন</h3></article>
+<article class="candle-card"><div class="candle-number">18</div><svg viewBox="0 0 100 125" aria-label="ডার্ক ক্লাউড কভার"><path d="M50 12V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="35" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>ডার্ক ক্লাউড কভার</h3></article>
+<article class="candle-card"><div class="candle-number">19</div><svg viewBox="0 0 100 125" aria-label="মর্নিং স্টার"><path d="M50 5V115" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="72" width="30" height="20" rx="2" fill="#ff6678"/></svg><h3>মর্নিং স্টার</h3></article>
+<article class="candle-card"><div class="candle-number">20</div><svg viewBox="0 0 100 125" aria-label="ইভনিং স্টার"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="52" width="30" height="10" rx="2" fill="#00f59a"/></svg><h3>ইভনিং স্টার</h3></article>
+<article class="candle-card"><div class="candle-number">21</div><svg viewBox="0 0 100 125" aria-label="থ্রি হোয়াইট সোলজার্স"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#00f59a"/></svg><h3>থ্রি হোয়াইট সোলজার্স</h3></article>
+<article class="candle-card"><div class="candle-number">22</div><svg viewBox="0 0 100 125" aria-label="থ্রি ব্ল্যাক ক্রো"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#ff6678"/></svg><h3>থ্রি ব্ল্যাক ক্রো</h3></article>
+<article class="candle-card"><div class="candle-number">23</div><svg viewBox="0 0 100 125" aria-label="ইনসাইড বার"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>ইনসাইড বার</h3></article>
+<article class="candle-card"><div class="candle-number">24</div><svg viewBox="0 0 100 125" aria-label="আউটসাইড বার"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="20" rx="2" fill="#00f59a"/></svg><h3>আউটসাইড বার</h3></article>
+<article class="candle-card"><div class="candle-number">25</div><svg viewBox="0 0 100 125" aria-label="বুলিশ কিকার"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="48" width="30" height="22" rx="2" fill="#ff6678"/></svg><h3>বুলিশ কিকার</h3></article>
+<article class="candle-card"><div class="candle-number">26</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ কিকার"><path d="M50 12V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="35" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>বেয়ারিশ কিকার</h3></article>
+<article class="candle-card"><div class="candle-number">27</div><svg viewBox="0 0 100 125" aria-label="টুইজার টপ"><path d="M50 5V115" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="72" width="30" height="20" rx="2" fill="#ff6678"/></svg><h3>টুইজার টপ</h3></article>
+<article class="candle-card"><div class="candle-number">28</div><svg viewBox="0 0 100 125" aria-label="টুইজার বটম"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="52" width="30" height="10" rx="2" fill="#00f59a"/></svg><h3>টুইজার বটম</h3></article>
+<article class="candle-card"><div class="candle-number">29</div><svg viewBox="0 0 100 125" aria-label="বুলিশ বেল্ট হোল্ড"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#00f59a"/></svg><h3>বুলিশ বেল্ট হোল্ড</h3></article>
+<article class="candle-card"><div class="candle-number">30</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ বেল্ট হোল্ড"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#ff6678"/></svg><h3>বেয়ারিশ বেল্ট হোল্ড</h3></article>
+<article class="candle-card"><div class="candle-number">31</div><svg viewBox="0 0 100 125" aria-label="বুলিশ কাউন্টারঅ্যাটাক"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>বুলিশ কাউন্টারঅ্যাটাক</h3></article>
+<article class="candle-card"><div class="candle-number">32</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ কাউন্টারঅ্যাটাক"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="20" rx="2" fill="#00f59a"/></svg><h3>বেয়ারিশ কাউন্টারঅ্যাটাক</h3></article>
+<article class="candle-card"><div class="candle-number">33</div><svg viewBox="0 0 100 125" aria-label="ম্যাচিং লো"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="48" width="30" height="22" rx="2" fill="#ff6678"/></svg><h3>ম্যাচিং লো</h3></article>
+<article class="candle-card"><div class="candle-number">34</div><svg viewBox="0 0 100 125" aria-label="ম্যাচিং হাই"><path d="M50 12V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="35" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>ম্যাচিং হাই</h3></article>
+<article class="candle-card"><div class="candle-number">35</div><svg viewBox="0 0 100 125" aria-label="থ্রি ইনসাইড আপ"><path d="M50 5V115" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="72" width="30" height="20" rx="2" fill="#ff6678"/></svg><h3>থ্রি ইনসাইড আপ</h3></article>
+<article class="candle-card"><div class="candle-number">36</div><svg viewBox="0 0 100 125" aria-label="থ্রি ইনসাইড ডাউন"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="52" width="30" height="10" rx="2" fill="#00f59a"/></svg><h3>থ্রি ইনসাইড ডাউন</h3></article>
+<article class="candle-card"><div class="candle-number">37</div><svg viewBox="0 0 100 125" aria-label="থ্রি আউটসাইড আপ"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#00f59a"/></svg><h3>থ্রি আউটসাইড আপ</h3></article>
+<article class="candle-card"><div class="candle-number">38</div><svg viewBox="0 0 100 125" aria-label="থ্রি আউটসাইড ডাউন"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#ff6678"/></svg><h3>থ্রি আউটসাইড ডাউন</h3></article>
+<article class="candle-card"><div class="candle-number">39</div><svg viewBox="0 0 100 125" aria-label="রাইজিং থ্রি মেথড"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>রাইজিং থ্রি মেথড</h3></article>
+<article class="candle-card"><div class="candle-number">40</div><svg viewBox="0 0 100 125" aria-label="ফলিং থ্রি মেথড"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="20" rx="2" fill="#00f59a"/></svg><h3>ফলিং থ্রি মেথড</h3></article>
+<article class="candle-card"><div class="candle-number">41</div><svg viewBox="0 0 100 125" aria-label="ট্রাই-স্টার"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="48" width="30" height="22" rx="2" fill="#ff6678"/></svg><h3>ট্রাই-স্টার</h3></article>
+<article class="candle-card"><div class="candle-number">42</div><svg viewBox="0 0 100 125" aria-label="বুলিশ ডোজি স্টার"><path d="M50 12V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="35" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>বুলিশ ডোজি স্টার</h3></article>
+<article class="candle-card"><div class="candle-number">43</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ ডোজি স্টার"><path d="M50 5V115" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="72" width="30" height="20" rx="2" fill="#ff6678"/></svg><h3>বেয়ারিশ ডোজি স্টার</h3></article>
+<article class="candle-card"><div class="candle-number">44</div><svg viewBox="0 0 100 125" aria-label="অ্যাব্যান্ডনড বেবি বুলিশ"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="52" width="30" height="10" rx="2" fill="#00f59a"/></svg><h3>অ্যাব্যান্ডনড বেবি বুলিশ</h3></article>
+<article class="candle-card"><div class="candle-number">45</div><svg viewBox="0 0 100 125" aria-label="অ্যাব্যান্ডনড বেবি বেয়ারিশ"><path d="M50 10V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#00f59a"/></svg><h3>অ্যাব্যান্ডনড বেবি বেয়ারিশ</h3></article>
+<article class="candle-card"><div class="candle-number">46</div><svg viewBox="0 0 100 125" aria-label="বুলিশ হাই ওয়েভ"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="42" width="30" height="40" rx="2" fill="#ff6678"/></svg><h3>বুলিশ হাই ওয়েভ</h3></article>
+<article class="candle-card"><div class="candle-number">47</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ হাই ওয়েভ"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>বেয়ারিশ হাই ওয়েভ</h3></article>
+<article class="candle-card"><div class="candle-number">48</div><svg viewBox="0 0 100 125" aria-label="বুলিশ লং-শ্যাডো"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="50" width="30" height="20" rx="2" fill="#00f59a"/></svg><h3>বুলিশ লং-শ্যাডো</h3></article>
+<article class="candle-card"><div class="candle-number">49</div><svg viewBox="0 0 100 125" aria-label="বেয়ারিশ লং-শ্যাডো"><path d="M50 8V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="48" width="30" height="22" rx="2" fill="#ff6678"/></svg><h3>বেয়ারিশ লং-শ্যাডো</h3></article>
+<article class="candle-card"><div class="candle-number">50</div><svg viewBox="0 0 100 125" aria-label="বুলিশ রিভার্সাল বার"><path d="M50 12V112" stroke="#b8d9ca" stroke-width="3"/><rect x="35" y="35" width="30" height="25" rx="2" fill="#00f59a"/></svg><h3>বুলিশ রিভার্সাল বার</h3></article>
+  </div>
+</section>
+
+
+
+
+<section id="bos-choch">
+  <div class="title">
+    <h2>BOS & CHOCH — ছবি দিয়ে সহজে বোঝো</h2>
+    <p>এই অংশটি chart structure শেখার জন্য। BOS/CHOCH-কে একা Buy/Sell signal হিসেবে ব্যবহার না করে market context, liquidity এবং higher-timeframe structure-এর সাথে মিলিয়ে শেখা উচিত।</p>
+  </div>
+
+  <div class="boschoch-wrap">
+    <div class="boschoch-grid">
+
+      <article class="bos-card">
+        <h3>📈 BOS — Break of Structure</h3>
+        <p>আগের গুরুত্বপূর্ণ swing high/low ভেঙে একই direction-এর structure continue করার ধারণাকে BOS বলা হয়।</p>
+        <svg class="bos-svg" viewBox="0 0 620 210" role="img" aria-label="Bullish BOS diagram">
+          <path d="M35 175H590" stroke="#173c2d" stroke-width="2"/>
+          <path d="M45 165 L120 120 L190 145 L270 85 L340 112 L425 55 L505 82 L575 35" fill="none" stroke="#00f59a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M425 55 H535" stroke="#ffd166" stroke-width="3" stroke-dasharray="8 7"/>
+          <path d="M535 55 L535 30" stroke="#ffd166" stroke-width="3"/>
+          <text x="438" y="47" fill="#ffd166" font-size="15" font-weight="800">Previous High</text>
+          <text x="510" y="25" fill="#00f59a" font-size="16" font-weight="900">BOS ↑</text>
+          <circle cx="425" cy="55" r="5" fill="#ffd166"/>
+          <circle cx="535" cy="55" r="5" fill="#00f59a"/>
+        </svg>
+        <div class="legend"><span><i class="dot dot-green"></i>Price move</span><span><i class="dot dot-gold"></i>Old structure</span></div>
+        <ol class="steps">
+          <li>আগের swing high/low চিহ্নিত করো।</li>
+          <li>Price সেটি break করেছে কি না দেখো।</li>
+          <li>Break-এর পরে context ও confirmation শেখো।</li>
+        </ol>
+      </article>
+
+      <article class="bos-card">
+        <h3>🔄 CHOCH — Change of Character</h3>
+        <p>আগের trend-এর বিপরীতে গুরুত্বপূর্ণ swing structure break হলে সম্ভাব্য character change বোঝাতে CHOCH শব্দটি ব্যবহার করা হয়। এটি reversal-এর নিশ্চয়তা নয়।</p>
+        <svg class="bos-svg" viewBox="0 0 620 210" role="img" aria-label="Bearish CHOCH diagram">
+          <path d="M35 175H590" stroke="#173c2d" stroke-width="2"/>
+          <path d="M45 45 L120 92 L195 58 L270 112 L345 78 L425 135 L505 102 L575 162" fill="none" stroke="#bfffe4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M345 78 H500" stroke="#ffd166" stroke-width="3" stroke-dasharray="8 7"/>
+          <path d="M500 78 L500 110" stroke="#ff6678" stroke-width="3"/>
+          <text x="360" y="70" fill="#ffd166" font-size="15" font-weight="800">Key Low</text>
+          <text x="470" y="128" fill="#ff6678" font-size="16" font-weight="900">CHOCH ↓</text>
+          <circle cx="500" cy="78" r="5" fill="#ff6678"/>
+        </svg>
+        <div class="legend"><span><i class="dot dot-gold"></i>Key structure</span><span><i class="dot dot-red"></i>Character change</span></div>
+        <ol class="steps">
+          <li>বর্তমান trend-এর swing sequence দেখো।</li>
+          <li>গুরুত্বপূর্ণ opposite swing break হয়েছে কি না দেখো।</li>
+          <li>Reversal ধরে নেওয়ার আগে confirmation/context যাচাই করো।</li>
+        </ol>
+      </article>
+
+    </div>
+
+    <div class="demo-warning">
+      <strong>📚 শেখার নিয়ম:</strong> BOS বা CHOCH দেখে সরাসরি real-money trade করার নির্দেশনা হিসেবে এই পেজ ব্যবহার কোরো না। আগে historical chart ও demo/practice-এ structure শনাক্ত করার অভ্যাস করো।
+    </div>
+  </div>
+</section>
+
+
+<section id="strategies">
+  <div class="title">
+    <h2>Forex-এর ৮টি Educational Strategy</h2>
+    <p>ICT/SMC ও price-action শেখার জন্য ৮টি study framework। এগুলো guaranteed profit strategy নয়।</p>
+  </div>
+
+  <div class="strategy-wrap">
+    <div class="strategy-grid">
+      <article class="strategy-card"><span class="strategy-num">01</span><h3>Liquidity Sweep</h3><svg class="strategy-visual" viewBox="0 0 420 150" role="img" aria-label="Liquidity Sweep">
+<path d="M15 125H405" stroke="#173c2d" stroke-width="2"/>
+<path d="M25 105L75 75L120 88L165 50L210 72L255 38L300 60L345 25L395 65" fill="none" stroke="#bfffe4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M345 25V100" stroke="#ffd166" stroke-width="2" stroke-dasharray="7 6"/>
+<path d="M345 25L365 68L395 42" fill="none" stroke="#ff6678" stroke-width="4" stroke-linecap="round"/>
+<text x="290" y="18" fill="#ffd166" font-size="13" font-weight="800">Liquidity</text><text x="350" y="118" fill="#ff6678" font-size="13" font-weight="800">Sweep</text>
+</svg><p><strong>Focus:</strong> গুরুত্বপূর্ণ high/low এবং liquidity। <strong>Study:</strong> price কোনো obvious high/low নেওয়ার পরে structure কীভাবে পরিবর্তিত বা continue হয় তা chart-এ mark করো।</p></article>
+
+      <article class="strategy-card"><span class="strategy-num">02</span><h3>Order Block + Structure</h3><svg class="strategy-visual" viewBox="0 0 420 150" role="img" aria-label="Order Block and Structure">
+<path d="M15 125H405" stroke="#173c2d" stroke-width="2"/>
+<rect x="145" y="72" width="105" height="38" rx="6" fill="#241d0a" stroke="#ffd166" stroke-width="2"/>
+<path d="M25 105L70 80L110 95L145 65L175 90L210 48L245 76L290 38L330 55L395 20" fill="none" stroke="#00f59a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M290 38H375" stroke="#bfffe4" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="161" y="96" fill="#ffd166" font-size="13" font-weight="800">ORDER BLOCK</text><text x="310" y="32" fill="#bfffe4" font-size="13" font-weight="800">Structure</text>
+</svg><p><strong>Focus:</strong> Order Block-এর সাথে market structure-এর সম্পর্ক। <strong>Study:</strong> OB-এর আগে ও পরে liquidity, BOS/CHOCH এবং price reaction observe করো।</p></article>
+
+      <article class="strategy-card"><span class="strategy-num">03</span><h3>FVG / Imbalance</h3><svg class="strategy-visual" viewBox="0 0 420 150" role="img" aria-label="FVG Imbalance">
+<path d="M15 125H405" stroke="#173c2d" stroke-width="2"/>
+<rect x="195" y="38" width="85" height="48" rx="5" fill="#0c3324" stroke="#00f59a" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M25 105L75 95L120 108L155 90L185 100L215 35L245 55L275 48L315 30L355 42L395 18" fill="none" stroke="#00f59a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="212" y="67" fill="#bfffe4" font-size="14" font-weight="800">FVG</text><text x="194" y="105" fill="#9eb0a8" font-size="12">Imbalance</text>
+</svg><p><strong>Focus:</strong> displacement-এর সময় তৈরি Fair Value Gap বা imbalance। <strong>Study:</strong> কোন FVG পরে respect, fill বা break হয়েছে তা historical chart-এ তুলনা করো।</p></article>
+
+      <article class="strategy-card"><span class="strategy-num">04</span><h3>Premium / Discount</h3><svg class="strategy-visual" viewBox="0 0 420 150" role="img" aria-label="Premium and Discount">
+<rect x="55" y="20" width="310" height="110" rx="8" fill="#09140f" stroke="#173c2d" stroke-width="2"/>
+<path d="M55 75H365" stroke="#ffd166" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="72" y="50" fill="#ffb4bd" font-size="16" font-weight="800">PREMIUM</text>
+<text x="72" y="108" fill="#bfffe4" font-size="16" font-weight="800">DISCOUNT</text>
+<text x="292" y="70" fill="#ffd166" font-size="12">50% EQ</text>
+<path d="M105 112L145 96L180 105L215 82L250 92L285 58L325 72" fill="none" stroke="#00f59a" stroke-width="4" stroke-linecap="round"/>
+</svg><p><strong>Focus:</strong> একটি পরিষ্কার dealing range। <strong>Study:</strong> range-এর Premium ও Discount zone-এ price behaviour এবং structure-এর পার্থক্য observe করো।</p></article>
+
+      <article class="strategy-card"><span class="strategy-num">05</span><h3>PDH / PDL</h3><svg class="strategy-visual" viewBox="0 0 420 150" role="img" aria-label="Previous Day High and Low">
+<path d="M15 125H405" stroke="#173c2d" stroke-width="2"/>
+<path d="M25 50H395" stroke="#ffd166" stroke-width="2" stroke-dasharray="8 6"/>
+<path d="M25 105H395" stroke="#00f59a" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="28" y="42" fill="#ffd166" font-size="14" font-weight="800">PDH — Previous Day High</text>
+<text x="28" y="120" fill="#00f59a" font-size="14" font-weight="800">PDL — Previous Day Low</text>
+<path d="M30 92L70 70L110 82L150 48L190 62L230 30L270 55L310 80L350 62L395 90" fill="none" stroke="#bfffe4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg><p><strong>Focus:</strong> Previous Day High ও Previous Day Low। <strong>Study:</strong> নতুন দিনের price এই reference levels-এর কাছে কীভাবে react করে তা chart-এ mark করো।</p></article>
+
+      <article class="strategy-card"><span class="strategy-num">06</span><h3>Session Range</h3><svg class="strategy-visual" viewBox="0 0 420 150" role="img" aria-label="Session Range">
+<rect x="40" y="38" width="130" height="68" rx="6" fill="#10261b" stroke="#bfffe4" stroke-width="2"/>
+<rect x="170" y="28" width="120" height="88" rx="6" fill="#0c3324" stroke="#00f59a" stroke-width="2"/>
+<rect x="290" y="20" width="90" height="100" rx="6" fill="#241d0a" stroke="#ffd166" stroke-width="2"/>
+<text x="73" y="78" fill="#bfffe4" font-size="14" font-weight="800">ASIA</text>
+<text x="196" y="78" fill="#00f59a" font-size="14" font-weight="800">LONDON</text>
+<text x="309" y="78" fill="#ffd166" font-size="14" font-weight="800">NEW YORK</text>
+<path d="M25 125H395" stroke="#173c2d" stroke-width="2"/>
+</svg><p><strong>Focus:</strong> Asian, London ও New York session range। <strong>Study:</strong> session change-এর সময় high/low, liquidity ও volatility কীভাবে বদলায় তা compare করো।</p></article>
+
+      <article class="strategy-card"><span class="strategy-num">07</span><h3>Displacement + Retracement</h3><svg class="strategy-visual" viewBox="0 0 420 150" aria-label="Displacement and Retracement">
+<path d="M15 125H405" stroke="#173c2d" stroke-width="2"/>
+<path d="M30 105L75 98L115 110L145 35L175 55L205 25L235 48" fill="none" stroke="#00f59a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M235 48L265 75L295 58L330 80L365 55L395 68" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M145 35L125 55" stroke="#00f59a" stroke-width="3"/><text x="88" y="25" fill="#00f59a" font-size="13" font-weight="800">DISPLACEMENT</text>
+<text x="268" y="104" fill="#ffd166" font-size="13" font-weight="800">RETRACEMENT</text>
+</svg><p><strong>Focus:</strong> strong directional displacement এবং পরের retracement। <strong>Study:</strong> displacement-এর strength, structure break এবং retracement-এর behaviour আলাদা করে নোট করো।</p></article>
+
+      <article class="strategy-card"><span class="strategy-num">08</span><h3>Multi-Timeframe Confluence</h3><svg class="strategy-visual" viewBox="0 0 420 150" aria-label="Multi Timeframe Confluence">
+<rect x="20" y="20" width="170" height="105" rx="8" fill="#09140f" stroke="#173c2d" stroke-width="2"/>
+<rect x="230" y="20" width="170" height="105" rx="8" fill="#09140f" stroke="#173c2d" stroke-width="2"/>
+<text x="82" y="42" fill="#bfffe4" font-size="14" font-weight="800">HIGHER TF</text>
+<text x="295" y="42" fill="#00f59a" font-size="14" font-weight="800">LOWER TF</text>
+<path d="M35 100L65 75L95 88L125 55L155 68L175 45" fill="none" stroke="#bfffe4" stroke-width="3"/>
+<path d="M245 100L270 88L290 95L310 60L330 76L350 45L385 62" fill="none" stroke="#00f59a" stroke-width="3"/>
+<path d="M190 72H230" stroke="#ffd166" stroke-width="3"/><path d="M218 62L230 72L218 82" fill="none" stroke="#ffd166" stroke-width="3"/>
+<text x="154" y="143" fill="#ffd166" font-size="12" font-weight="800">CONFLUENCE</text>
+</svg><p><strong>Focus:</strong> Higher-Timeframe context + Lower-Timeframe structure। <strong>Study:</strong> বড় timeframe-এর context-এর সাথে ছোট timeframe-এর BOS/CHOCH ও liquidity একই দিকে আছে কি না যাচাই করো।</p></article>
+    </div>
+
+    <div class="demo-warning">
+      <strong>⚠️ Risk note:</strong> এই ৮টি framework শেখার ও demo/historical-chart practice-এর জন্য। কোনো strategy নিশ্চিত profit দেয় না। আগে structure শনাক্ত করা, chart journal রাখা এবং risk management শেখার দিকে ফোকাস করো।
+    </div>
+  </div>
+</section>
+
+
+
+<section id="sessions">
+  <div class="title">
+    <h2>ট্রেডিং সেশন — বাংলাদেশ সময়</h2>
+    <p class="session-intro">ফরেক্স মার্কেট ২৪ ঘণ্টা চললেও বিভিন্ন সেশনে মার্কেটের গতি, লিকুইডিটি ও ভোলাটিলিটি আলাদা হতে পারে। নিচের সময়গুলো বাংলাদেশ সময়ের আনুমানিক সময়; Daylight Saving Time (DST) অনুযায়ী কিছু সময় এক ঘণ্টা পরিবর্তিত হতে পারে।</p>
+  </div>
+
+  <div class="session-wrap">
+    <div class="session-grid">
+
+      <article class="session-card">
+        <svg class="session-icon" viewBox="0 0 120 120" role="img" aria-label="Sydney session illustration">
+          <circle cx="60" cy="60" r="42" fill="#0b2118" stroke="#275f49" stroke-width="3"/>
+          <circle cx="60" cy="60" r="29" fill="none" stroke="#00f59a" stroke-width="3"/>
+          <path d="M60 43v19l13 8" fill="none" stroke="#00f59a" stroke-width="4" stroke-linecap="round"/>
+          <path d="M22 86c12-13 28-18 44-14 12 3 22 1 32-8" fill="none" stroke="#bfffe4" stroke-width="3" stroke-linecap="round"/>
+          <path d="M86 61l12 3-8 9" fill="none" stroke="#bfffe4" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="session-badge">MARKET OPEN</span>
+        <h3>🇦🇺 Sydney Session</h3>
+        <div class="session-time">৩:০০ AM — ১২:০০ PM*</div>
+        <p>এশিয়া-প্যাসিফিক অঞ্চলের শুরু। সাধারণত দিনের শুরুতে মার্কেটের গতি তুলনামূলক কম থাকতে পারে।</p>
+        <ul class="session-points">
+          <li>Market open observe করুন</li>
+          <li>Range ও liquidity লক্ষ্য করুন</li>
+          <li>পরের session-এর জন্য context তৈরি করুন</li>
+        </ul>
+        <svg class="session-mini-chart" viewBox="0 0 300 72" aria-hidden="true">
+          <path d="M5 56 L35 51 L65 54 L95 44 L125 48 L155 38 L185 42 L215 31 L245 36 L295 24" fill="none" stroke="#00f59a" stroke-width="3"/>
+          <path d="M5 60H295" stroke="#214b38" stroke-width="2"/>
+        </svg>
+      </article>
+
+      <article class="session-card">
+        <svg class="session-icon" viewBox="0 0 120 120" role="img" aria-label="Tokyo session illustration">
+          <circle cx="60" cy="60" r="42" fill="#0b2118" stroke="#275f49" stroke-width="3"/>
+          <circle cx="60" cy="60" r="27" fill="none" stroke="#00f59a" stroke-width="3"/>
+          <path d="M60 42v36M42 60h36" stroke="#bfffe4" stroke-width="3" stroke-linecap="round"/>
+          <path d="M31 92l15-18 12 7 13-19 18 12" fill="none" stroke="#00f59a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="session-badge">ASIA SESSION</span>
+        <h3>🇯🇵 Tokyo Session</h3>
+        <div class="session-time">৫:০০ AM — ২:০০ PM*</div>
+        <p>এশিয়ান মার্কেটের প্রধান অংশ। অনেক সময় range তৈরি হয়, যা পরের session-এ liquidity reference হিসেবে দেখা যায়।</p>
+        <ul class="session-points">
+          <li>Asian range mark করুন</li>
+          <li>High/Low ও liquidity দেখুন</li>
+          <li>London-এর আগে structure observe করুন</li>
+        </ul>
+        <svg class="session-mini-chart" viewBox="0 0 300 72" aria-hidden="true">
+          <path d="M5 45 L35 40 L65 47 L95 41 L125 46 L155 39 L185 45 L215 40 L245 46 L295 41" fill="none" stroke="#bfffe4" stroke-width="3"/>
+          <path d="M5 58H295" stroke="#214b38" stroke-width="2"/>
+        </svg>
+      </article>
+
+      <article class="session-card">
+        <svg class="session-icon" viewBox="0 0 120 120" role="img" aria-label="London session illustration">
+          <circle cx="60" cy="60" r="42" fill="#0b2118" stroke="#275f49" stroke-width="3"/>
+          <path d="M30 76V48h10v28M48 76V36h10v40M66 76V54h10v22" fill="none" stroke="#00f59a" stroke-width="7" stroke-linecap="round"/>
+          <path d="M27 88h52" stroke="#bfffe4" stroke-width="3" stroke-linecap="round"/>
+          <path d="M76 49l18-17M94 32l-3 12M94 32l-12 3" fill="none" stroke="#bfffe4" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="session-badge">HIGH ACTIVITY</span>
+        <h3>🇬🇧 London Session</h3>
+        <div class="session-time">১:০০ PM — ১০:০০ PM*</div>
+        <p>ইউরোপের বড় liquidity flow শুরু হয়। Breakout, liquidity sweep ও structure shift বেশি দেখা যেতে পারে।</p>
+        <ul class="session-points">
+          <li>Asian high/low observe করুন</li>
+          <li>Liquidity sweep খুঁজুন</li>
+          <li>Structure confirmation ছাড়া সিদ্ধান্ত নয়</li>
+        </ul>
+        <svg class="session-mini-chart" viewBox="0 0 300 72" aria-hidden="true">
+          <path d="M5 52 L35 48 L65 51 L95 20 L125 36 L155 17 L185 31 L215 12 L245 22 L295 8" fill="none" stroke="#00f59a" stroke-width="3"/>
+          <path d="M5 60H295" stroke="#214b38" stroke-width="2"/>
+        </svg>
+      </article>
+
+      <article class="session-card">
+        <svg class="session-icon" viewBox="0 0 120 120" role="img" aria-label="New York session illustration">
+          <circle cx="60" cy="60" r="42" fill="#0b2118" stroke="#275f49" stroke-width="3"/>
+          <path d="M35 79V48h12v31M54 79V35h12v44M73 79V56h12v23" fill="none" stroke="#00f59a" stroke-width="7" stroke-linecap="round"/>
+          <path d="M27 88h66" stroke="#bfffe4" stroke-width="3" stroke-linecap="round"/>
+          <path d="M78 36l16 11M94 47l-13 1M94 47l-5-12" fill="none" stroke="#bfffe4" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="session-badge">HIGH VOLATILITY</span>
+        <h3>🇺🇸 New York Session</h3>
+        <div class="session-time">৬:০০ PM — ৩:০০ AM*</div>
+        <p>US market activity বাড়ে। London-এর সাথে overlap থাকায় অনেক instrument-এ volatility বেশি হতে পারে।</p>
+        <ul class="session-points">
+          <li>US news/calendar খেয়াল করুন</li>
+          <li>London range ও liquidity দেখুন</li>
+          <li>Risk management সবসময় ব্যবহার করুন</li>
+        </ul>
+        <svg class="session-mini-chart" viewBox="0 0 300 72" aria-hidden="true">
+          <path d="M5 48 L35 44 L65 49 L95 15 L125 43 L155 25 L185 50 L215 20 L245 38 L295 13" fill="none" stroke="#00f59a" stroke-width="3"/>
+          <path d="M5 60H295" stroke="#214b38" stroke-width="2"/>
+        </svg>
+      </article>
+
+      <article class="session-card overlap">
+        <svg class="session-icon" viewBox="0 0 120 120" role="img" aria-label="London New York overlap illustration">
+          <circle cx="60" cy="60" r="43" fill="#0b2118" stroke="#00f59a" stroke-width="3"/>
+          <circle cx="49" cy="60" r="27" fill="none" stroke="#bfffe4" stroke-width="3"/>
+          <circle cx="71" cy="60" r="27" fill="none" stroke="#00f59a" stroke-width="3"/>
+          <path d="M38 78l14-19 10 8 13-23 16 12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="session-badge">🔥 LONDON + NEW YORK OVERLAP</span>
+        <h3>সবচেয়ে গুরুত্বপূর্ণ Overlap Window</h3>
+        <div class="session-time">৬:০০ PM — ১০:০০ PM*</div>
+        <p>London ও New York একসাথে active থাকার সময়। Liquidity ও volatility তুলনামূলক বেশি হতে পারে। তবে session overlap নিজে কোনো Buy/Sell signal নয়।</p>
+        <ul class="session-points">
+          <li>Liquidity + structure confirmation দেখুন</li>
+          <li>Economic news থাকলে সতর্ক থাকুন</li>
+          <li>Demo/practice-এ setup যাচাই করুন</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <div class="session-timeline">
+      <h3>বাংলাদেশ সময় — ২৪ ঘণ্টার Session Timeline</h3>
+      <div class="timeline" aria-label="Trading session timeline">
+        <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+        <span class="active"></span><span class="active"></span><span></span><span></span>
+      </div>
+      <div class="timeline-labels">
+        <span>১২ AM</span><span>৩ AM</span><span>৬ AM</span><span>৯ AM</span><span>১২ PM</span><span>৩ PM</span><span>৬ PM</span><span>৯ PM</span><span>১২ AM</span>
+      </div>
+      <div class="session-note">
+        <strong>⚠️ গুরুত্বপূর্ণ:</strong> এগুলো শিক্ষামূলক আনুমানিক সময়। Broker/chart-এর timezone এবং Daylight Saving Time (DST) অনুযায়ী session-এর সময় এক ঘণ্টা এদিক-ওদিক হতে পারে। Session দেখে একা trade decision নেওয়া উচিত নয়—market structure, liquidity, news এবং risk management আলাদা করে যাচাই করুন।
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="about">
+  <div class="cta">
+    <div class="title" style="margin-bottom:15px"><h2>আপনার ট্রেডিং জ্ঞান তৈরি করুন</h2><p>এই ওয়েবসাইটকে স্টাডি গাইড হিসেবে ব্যবহার করুন। ট্রেডিংয়ের আগে সবসময় রিস্ক ম্যানেজ করুন এবং নিজস্ব বিশ্লেষণ করুন।</p></div>
+    <button class="btn" id="topBtn">উপরে ফিরে যান ↑</button>
+  </div>
+</section>
+
+
+<section id="contact">
+  <div class="cta">
+    <div class="title" style="margin-bottom:20px">
+      <h2>ICT স্মার্ট মানি একাডেমিতে যোগাযোগ</h2>
+      <p>ওয়েবসাইট/কোর্স সংক্রান্ত বিষয়ে WhatsApp বা ইমেইলে যোগাযোগ করুন।</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="https://wa.me/8801873371451" target="_blank" rel="noopener">WhatsApp: 01873371451</a>
+      <a class="btn alt" href="mailto:abubakarabu42909@gmail.com">ইমেইল: abubakarabu42909@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer><div style="display:flex;justify-content:center;margin-bottom:14px"><svg class="brand-logo footer-logo" viewBox="0 0 520 120" role="img" aria-label="ICT Smart Money Academy logo">
+  <circle cx="58" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="7"/>
+  <path d="M28 76V48h12v28M45 76V38h12v38M62 76V52h12v24" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+  <path d="M25 91h52M77 48l28-25M105 23l-4 17M105 23l-17 3" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="125" y="54" font-family="Arial, sans-serif" font-size="32" font-weight="900" letter-spacing="1">ICT <tspan fill="#00f59a">স্মার্ট মানি</tspan></text>
+  <text x="127" y="86" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="7">ACADEMY</text>
+  <path d="M127 97h190" stroke="currentColor" stroke-width="2" opacity=".65"/>
+</svg></div>© 2026 ICT Smart Money Academy • Educational Website • WhatsApp: 01873371451 • ইমেইল: abubakarabu42909@gmail.com • Trading involves substantial risk. This risk-management section is educational and is not financial advice.</footer>
+
+<div class="modal" id="modal"><div class="modal-card"><button class="close" id="close">×</button><h2 id="modalTitle"></h2><p id="modalText"></p></div></div>
+
+<script>
+const nav=document.getElementById('nav'),menu=document.getElementById('menu');
+menu.addEventListener('click',()=>nav.classList.toggle('mobile'));
+
+const search=document.getElementById('search'),cards=[...document.querySelectorAll('.card')],filters=[...document.querySelectorAll('.filter')];
+let current='all';
+function render(){
+  const q=search.value.toLowerCase();	
+  cards.forEach(c=>{
+    const okCat=current==='all'||c.dataset.cat===current;
+    const okText=c.dataset.name.toLowerCase().includes(q)||c.innerText.toLowerCase().includes(q);
+    c.style.display=okCat&&okText?'block':'none';
+  });
+}
+search.addEventListener('input',render);
+filters.forEach(b=>b.addEventListener('click',()=>{filters.forEach(x=>x.classList.remove('active'));b.classList.add('active');current=b.dataset.filter;render()}));
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('mobile')));
+document.getElementById('topBtn').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+
+const modal=document.getElementById('modal'),mt=document.getElementById('modalTitle'),mx=document.getElementById('modalText');
+document.querySelectorAll('.topic h3').forEach(h=>h.addEventListener('dblclick',()=>{
+  mt.textContent=h.textContent;mx.textContent=h.parentElement.querySelector('p').textContent;modal.classList.add('show');
+}));
+document.getElementById('close').onclick=()=>modal.classList.remove('show');
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show')});
+
+}
+
+</script>
+</body>
+</html>
